@@ -9,9 +9,15 @@ using WalletAppWPF.Controller;
 
 namespace WalletAppWPF.Models
 {
-    public class TransactionsListInfo
+    public class TransactionsListInfo : INotifyPropertyChanged
     {
         CardBalance card = new();
+        
+
+        public TransactionsListInfo()
+        {
+            SetPointsPropertyAndTransactionsList();
+        }
         public string BalanceField
         {
             get { return $"${card.GetBalance()}"; }
@@ -22,11 +28,20 @@ namespace WalletAppWPF.Models
             get { return $"${card.GetAvailableMoney()} Available"; } 
             set { }
         }
-        public string PointsField
+        GetDailyPointsFromApi getDailyPoints = new();
+        public string PointsField { get; set; }
+        private async void SetPointsPropertyAndTransactionsList()
         {
-            get { return CalculationPoints.CalculatePoints(DateTime.Now); }
-            set { }
+            PointsField = await getDailyPoints.GetDailyPointsField();
+            OnPropertyChanged("PointsField");
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
 
     }
 }

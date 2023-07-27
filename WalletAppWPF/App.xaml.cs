@@ -13,5 +13,6 @@ namespace WalletAppWPF
     /// </summary>
     public partial class App : Application
     {
+       public static string connectionApiField = "https://localhost:7268/";
     }
 }
