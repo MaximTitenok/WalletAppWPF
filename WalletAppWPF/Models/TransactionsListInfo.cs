@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WalletAppWPF.Controller;
 
 namespace WalletAppWPF.Models
 {
@@ -19,6 +20,11 @@ namespace WalletAppWPF.Models
         public string AvaliableMoneyField 
         {
             get { return $"${card.GetAvailableMoney()} Available"; } 
+            set { }
+        }
+        public string PointsField
+        {
+            get { return CalculationPoints.CalculatePoints(DateTime.Now); }
             set { }
         }
 

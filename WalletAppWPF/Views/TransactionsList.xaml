@@ -18,10 +18,13 @@
                            Foreground="Black" TextAlignment="Left" FontSize="20" Text="{Binding BalanceField}"/>
 
                 <TextBlock x:Name="avaliableTextBlock" Height="20" VerticalAlignment="Top" Margin="10,51,-13,0" 
-                           Foreground="#BEBEBE" TextAlignment="Left" FontSize="14" Text="{Binding AvaliableMoneyField}"/> 
+                           Foreground="#BEBEBE" TextAlignment="Left" FontSize="14" Text="{Binding AvaliableMoneyField}"/>
             </Grid>
             <Grid Width="195" HorizontalAlignment="Left" Margin="15,110,0,0" Background="White" >
-                <!-- Здесь можете разместить содержимое первого блока -->
+                <TextBlock Height="20" VerticalAlignment="Top" Margin="10,10,-11,0" 
+                    Foreground="Black" TextAlignment="Left" FontSize="16"><Run Text="Daily Points"/></TextBlock>
+                <TextBlock x:Name="dailyPoints" Height="26" VerticalAlignment="Center" Margin="10,25,78,0"
+                    Foreground="#BEBEBE" TextAlignment="Left" FontSize="20" Text="{Binding PointsField}"/>
             </Grid>
             <Grid Width="195" HorizontalAlignment="Left" Margin="222,16,0,0" Background="White" >
                 <Ellipse Width="75" Height="75" Fill="#DCDCDC" Margin="105,84,15,15" />
@@ -31,7 +34,7 @@
                            Foreground="#BEBEBE" TextAlignment="Center" FontSize="16">You've paid your</TextBlock>
                 <TextBlock x:Name="monthTextBlock" Height="20" VerticalAlignment="Top" Margin="0,50,-1,0" 
                            Foreground="#BEBEBE" TextAlignment="Center" FontSize="16">current balance</TextBlock>
-                <Image Source="/WalletAppWPF;component/Assets/checkMark.png" Width="50" Height="50" Margin="185,114,-40,10" />
+                <Image Source="/WalletAppWPF;component/Assets/checkMark.png" Width="50" Height="50" Margin="118,96,27,28" />
             </Grid>
 
         </Grid>

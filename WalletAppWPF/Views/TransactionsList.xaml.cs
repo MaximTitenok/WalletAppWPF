@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WalletAppWPF.Controller;
 using WalletAppWPF.Models;
 
 namespace WalletAppWPF
@@ -35,18 +36,8 @@ namespace WalletAppWPF
             string currentMonth = DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
             monthTextBlock.Text = $"{currentMonth} balance";
 
-            Uri fileUri = new Uri("Assets/checkMark.png", UriKind.Relative);
-            checkMark.Source = new BitmapImage(fileUri);
-            /*Uri imageUri = new Uri("Assets/checkMark.png", UriKind.RelativeOrAbsolute);
-            BitmapImage bitmap = new BitmapImage(imageUri);
-            checkMark.Source = bitmap;*/
-
             TransactionsListInfo transactionsListInfo = new TransactionsListInfo();
             this.DataContext = transactionsListInfo;
-
-        }
-        private void TransactionsList_GotFocus(object sender, RoutedEventArgs e)
-        {
 
         }
 
