@@ -10,7 +10,7 @@ namespace WalletAppWPF.Controller
     {
         public static string CalculatePoints( DateTime currentDate)
         {
-
+            
             TimeSpan duration = currentDate - GetSeasonStartDate();
             int daysSinceStart = duration.Days;
 
