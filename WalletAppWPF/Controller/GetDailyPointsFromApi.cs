@@ -27,7 +27,13 @@ namespace WalletAppWPF.Controller
                     if (response.IsSuccessStatusCode)
                     {
                         var transactions = await response.Content.ReadAsStringAsync();
-                        int points = Convert.ToInt32(transactions); 
+
+                        bool ParseResult = int.TryParse(transactions, out var points);
+                        if (ParseResult == false)
+                        {
+                            throw new Exception($"Response hasn't DailyPoints");
+                        }
+
                         if (points > 1000)
                         {
                             return $"{points / 1000}K";
@@ -36,7 +42,7 @@ namespace WalletAppWPF.Controller
                     }
                     else
                     {
-                        new Exception($"Response isn't success. Response status code: {response.StatusCode}");
+                        throw new Exception($"Response isn't success. Response status code: {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)

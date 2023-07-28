@@ -46,8 +46,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="14*"/>
             </Grid.RowDefinitions>
-            <!-- Здесь можете разместить содержимое нижнего блока -->
-            <TextBlock Text="Latest Transactions" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Margin="0,183,0,0" Grid.Row="1" />
+
         </Grid>
     </Grid>
 </Window>

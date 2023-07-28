@@ -7,45 +7,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Net.Http.Json;
+using System.Windows;
 
 namespace WalletAppWPF.Controller
 {
     public class GetTransactionsFromApi
     {
-        public async Task</*IEnumerable<TransactionsList>*/string> GetTransactions(int userId)
+        public async Task<IEnumerable<TransactionsList>> GetTransactions(int userId)
         {
             using (var client = new HttpClient())
             {
-                // Задайте базовий URL для вашого API
                 client.BaseAddress = new Uri(App.connectionApiField);
-
-                // Встановіть заголовок, якщо вам потрібно (наприклад, авторизація або інше)
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 try
                 {
-                    // Виконати GET-запит до API для отримання транзакцій для певного користувача
-                    var response = await client.GetAsync($"api/DailyPoints");
+                    var response = await client.GetAsync($"api/Transactions/{userId}");
                     if (response.IsSuccessStatusCode)
                     {
-                        // Прочитати відповідь як список транзакцій
-                        var transactions = await response.Content.ReadAsStringAsync();
-                        //var transactions = await response.Content.ReadFromJsonAsync<IEnumerable<TransactionsList>>();
+                        var transactions = await response.Content.ReadFromJsonAsync<IEnumerable<TransactionsList>>();
+                        if(transactions == null)
+                        {
+                            throw new Exception("Transactions list is empty!");
+                        }
                         return transactions;
                     }
                     else
                     {
-                        // Обробити помилку, якщо не вдалося отримати дані
-                        // Наприклад, вивести повідомлення або здійснити інші дії
+                        throw new Exception($"Response isn't success. Response status code: {response.StatusCode}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Обробити виняток, якщо сталася помилка під час виконання запиту
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-                return "";
+                return new List<TransactionsList>();
             }
         }
 
