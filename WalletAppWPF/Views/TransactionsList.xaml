@@ -4,10 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WalletAppWPF"
+        xmlns:models="clr-namespace:WalletAppWPF.Models" 
+        xmlns:converters="clr-namespace:WalletAppWPF.Views.Converters"
+        d:DataContext="{d:DesignInstance Type=models:TransactionsListInfo}"
         mc:Ignorable="d"
         Title="TransactionsList" Height="800" Width="450"
         WindowStartupLocation="CenterScreen">
-
+    <Window.Resources>
+        <converters:SumConverter x:Key="SumConverter"/>
+        <converters:DescriptionConverter x:Key="DescriptionConverter"/>
+        <converters:DateAndUserConverter x:Key="DateAndUserConverter"/>
+    </Window.Resources> 
     <Grid Background="#DCDCDC" Height="768" Width="432">
         <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
         <Grid Height="190" VerticalAlignment="Top" Background="#DCDCDC">
@@ -43,7 +50,8 @@
                            Foreground="Black" FontWeight="Bold" TextAlignment="Left" FontSize="20">Latest Transactions</TextBlock>
 
         <Grid VerticalAlignment="Bottom" Height="528" Margin="0,0,0,15" Width="402" Background="White" >
-            <ListBox ItemsSource="{Binding TransactionsList}" SelectionChanged="OnListBoxTransactionSelected">
+
+            <ListBox ItemsSource="{Binding TransactionsList}" SelectionChanged="OnListBoxTransactionSelected" Width="402">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Tag" Value="{Binding Id}" />
@@ -51,10 +59,37 @@
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Vertical" Height="48">
-                            <TextBlock Text="{Binding Name}" />
-                            <TextBlock Text="{Binding Description}" />
-                        </StackPanel>
+                        <Grid Height="48" Width="385">
+                            <TextBlock Height="15" Text="{Binding Name}" Margin="60,0,200,25" FontWeight="Bold" />
+                            <TextBlock Height="15" Margin="60,15,50,17" >
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource DescriptionConverter}">
+                                        <Binding Path="Description" />
+                                        <Binding Path="Pending" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Height="15" Margin="60,28,50,2" >
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource DateAndUserConverter}">
+                                        <Binding Path="Date" />
+                                        <Binding Path="User" />
+                                        <Binding Path="AuthorizedUser" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Height="15" TextAlignment="Right" Margin="264,4,50,29">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource SumConverter}">
+                                        <Binding Path="Sum" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <Ellipse Width="35" Height="35" VerticalAlignment="Center" Fill="#DCDCDC" Margin="15,0,330,0"/>
+                            <Image Source="/WalletAppWPF;component/Assets/checkMark.png" Width="25" Height="25"  Margin="15,0,330,0" />
+
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

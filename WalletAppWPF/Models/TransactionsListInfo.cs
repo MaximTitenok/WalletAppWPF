@@ -39,7 +39,7 @@ namespace WalletAppWPF.Models
         {
             PointsField = await getDailyPoints.GetDailyPointsField();
             OnPropertyChanged("PointsField");
-            TransactionsList = await getTransactions.GetTransactions(31);
+            TransactionsList = await getTransactions.GetTransactions(App.UserId);
             OnPropertyChanged("TransactionsList");
         }
 

@@ -14,5 +14,6 @@ namespace WalletAppWPF
     public partial class App : Application
     {
        public static string connectionApiField = "https://localhost:7268/";
+        public static int UserId = 2; // Random id in DB
     }
 }
