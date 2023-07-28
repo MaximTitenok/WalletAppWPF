@@ -42,11 +42,21 @@
                            Foreground="Black" FontWeight="Bold" TextAlignment="Left" FontSize="20">Latest Transactions</TextBlock>
 
         <Grid VerticalAlignment="Bottom" Height="528" Margin="0,0,0,15" Width="402" Background="White" >
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="14*"/>
-            </Grid.RowDefinitions>
-
+            <ListBox ItemsSource="{Binding TransactionsList}" SelectionChanged="OnListBoxTransactionSelected">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Tag" Value="{Binding Id}" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Height="48">
+                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Description}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

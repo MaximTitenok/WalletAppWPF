@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
 using WalletAppWPF.Controller;
 
 namespace WalletAppWPF.Models
@@ -15,10 +17,6 @@ namespace WalletAppWPF.Models
         GetDailyPointsFromApi getDailyPoints = new();
         GetTransactionsFromApi getTransactions = new();
 
-        public TransactionsListInfo()
-        {
-            SetPointsPropertyAndTransactionsList();
-        }
         public string BalanceField
         {
             get { return $"${card.GetBalance()}"; }
@@ -30,15 +28,22 @@ namespace WalletAppWPF.Models
             set { }
         }
         public string PointsField { get; set; }
-        public IEnumerable<TransactionsList> TransactionsLists { get; set; }
+        public IEnumerable<LatestTransactions> TransactionsList { get; set; }
+
+        public TransactionsListInfo()
+        {
+            SetPointsPropertyAndTransactionsList();
+        }
 
         private async void SetPointsPropertyAndTransactionsList()
         {
             PointsField = await getDailyPoints.GetDailyPointsField();
             OnPropertyChanged("PointsField");
-            TransactionsLists = await getTransactions.GetTransactions(1);
-            OnPropertyChanged("TransactionsLists");
+            TransactionsList = await getTransactions.GetTransactions(31);
+            OnPropertyChanged("TransactionsList");
         }
+
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

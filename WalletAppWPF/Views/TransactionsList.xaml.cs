@@ -40,6 +40,33 @@ namespace WalletAppWPF
             this.DataContext = transactionsListInfo;
 
         }
+        private void OnListBoxTransactionSelected(object sender, RoutedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            var selectedListBoxItem = listBox.SelectedItem;
+            try
+            {
+                if (selectedListBoxItem == null)
+                {
+                    throw new Exception("Transaction list row is null");
+                }
+                var selectedData = selectedListBoxItem as LatestTransactions;
+
+                if (selectedData == null)
+                {
+                    throw new Exception("Incorrect data in transaction list row");
+                }
+                long additionalData = selectedData.Id;
+
+                // Создаем новое окно и передаем дополнительное значение в качестве параметра
+                /*var newWindow = new NewWindow(additionalData);
+                newWindow.Show();*/
+            } 
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
     }
 }

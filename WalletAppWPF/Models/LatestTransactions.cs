@@ -11,21 +11,16 @@ namespace WalletAppWPF.Models
 {
     public class LatestTransactions
     {
-        private long Id { get; set; }
-        private decimal Sum { get; set; }
-        private string Name { get; set; }
-        private string Description{ get; set; }
+        public long Id { get; set; }
+        public decimal Sum { get; set; }
+        public string Name { get; set; }
+        public string Description{ get; set; }
         // TODO: Дата – за останній тиждень має виводитись назва дня для всього іншого дата.
-        private DateTime? Date { get; set; }
+        public DateTime? Date { get; set; }
         // TODO: транзакція може бути в статусі pending – тоді в неє це виводиться перед description
-        private bool Pending { get; set; }
-        private User User { get; set; }
-        private BitmapImage Image { get; set; }
-        
-        enum Types
-        {
-            Payment,
-            Credit
-        }
+        public bool Pending { get; set; }
+        public UserModel User { get; set; }
+        //private BitmapImage Image { get; set; }
+        public short Types { get; set; }   
     }
 }

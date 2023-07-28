@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Net.Http.Json;
 using System.Windows;
+using WalletAppWPF.Models;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace WalletAppWPF.Controller
 {
     public class GetTransactionsFromApi
     {
-        public async Task<IEnumerable<TransactionsList>> GetTransactions(int userId)
+        public async Task<IEnumerable<LatestTransactions>> GetTransactions(int userId)
         {
             using (var client = new HttpClient())
             {
@@ -26,12 +29,14 @@ namespace WalletAppWPF.Controller
                     var response = await client.GetAsync($"api/Transactions/{userId}");
                     if (response.IsSuccessStatusCode)
                     {
-                        var transactions = await response.Content.ReadFromJsonAsync<IEnumerable<TransactionsList>>();
+                        var transactions = await response.Content.ReadAsStringAsync();
+
                         if(transactions == null)
                         {
                             throw new Exception("Transactions list is empty!");
                         }
-                        return transactions;
+                        var result = JsonConvert.DeserializeObject<List<LatestTransactions>>(transactions)??new List<LatestTransactions>();
+                        return result;
                     }
                     else
                     {
@@ -42,7 +47,7 @@ namespace WalletAppWPF.Controller
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                return new List<TransactionsList>();
+                return new List<LatestTransactions>();
             }
         }
 

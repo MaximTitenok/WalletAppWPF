@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WalletAppWPF.Models
 {
-    class User
+    public class UserModel
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private string Surname { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
     }
 }
