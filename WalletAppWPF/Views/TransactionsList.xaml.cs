@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WalletAppWPF.Controller;
 using WalletAppWPF.Models;
+using WalletAppWPF.Views;
 
 namespace WalletAppWPF
 {
@@ -30,6 +31,7 @@ namespace WalletAppWPF
         {
             
             InitializeComponent();
+            
             
             this.ResizeMode = ResizeMode.NoResize;
 
@@ -58,9 +60,8 @@ namespace WalletAppWPF
                 }
                 long additionalData = selectedData.Id;
 
-                // Создаем новое окно и передаем дополнительное значение в качестве параметра
-                /*var newWindow = new NewWindow(additionalData);
-                newWindow.Show();*/
+                var transactionDetailWindow = new TransactionDetail(selectedData.User.Id, selectedData.Id);
+                transactionDetailWindow.Show();
             } 
             catch(Exception ex) 
             {

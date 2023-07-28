@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WalletAppWPF"
         mc:Ignorable="d"
-        Title="TransactionsList" Height="800" Width="450">
+        Title="TransactionsList" Height="800" Width="450"
+        WindowStartupLocation="CenterScreen">
 
     <Grid Background="#DCDCDC" Height="768" Width="432">
-
+        <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
         <Grid Height="190" VerticalAlignment="Top" Background="#DCDCDC">
             <!--general above block-->
             <Grid Width="195" Height="80" HorizontalAlignment="Left" Margin="15,16,0,94" Background="White">

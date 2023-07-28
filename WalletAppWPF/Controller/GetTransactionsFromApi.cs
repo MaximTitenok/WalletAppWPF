@@ -50,6 +50,40 @@ namespace WalletAppWPF.Controller
                 return new List<LatestTransactions>();
             }
         }
+        public async Task<LatestTransactions> GetTransaction(int userId, long transactionId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(App.connectionApiField);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                try
+                {
+                    var response = await client.GetAsync($"api/Transactions/{userId}/{transactionId}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var transactions = await response.Content.ReadAsStringAsync();
+
+                        if (transactions == null)
+                        {
+                            throw new Exception("Transactions list is empty!");
+                        }
+                        var result = JsonConvert.DeserializeObject<LatestTransactions>(transactions) ?? new LatestTransactions();
+                        return result;
+                    }
+                    else
+                    {
+                        throw new Exception($"Response isn't success. Response status code: {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                return new LatestTransactions();
+            }
+        }
 
     }
 }
