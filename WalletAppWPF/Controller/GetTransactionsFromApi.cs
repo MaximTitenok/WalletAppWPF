@@ -29,13 +29,10 @@ namespace WalletAppWPF.Controller
                     var response = await client.GetAsync($"api/Transactions/{userId}");
                     if (response.IsSuccessStatusCode)
                     {
-                        var transactions = await response.Content.ReadAsStringAsync();
-
-                        if(transactions == null)
-                        {
+                        var transactions = await response.Content.ReadAsStringAsync() ??
                             throw new Exception("Transactions list is empty!");
-                        }
-                        var result = JsonConvert.DeserializeObject<List<LatestTransactions>>(transactions)??new List<LatestTransactions>();
+                        var result = JsonConvert.DeserializeObject<List<LatestTransactions>>(transactions) ?? 
+                            new List<LatestTransactions>();
                         return result;
                     }
                     else
@@ -63,12 +60,8 @@ namespace WalletAppWPF.Controller
                     var response = await client.GetAsync($"api/Transactions/{userId}/{transactionId}");
                     if (response.IsSuccessStatusCode)
                     {
-                        var transactions = await response.Content.ReadAsStringAsync();
-
-                        if (transactions == null)
-                        {
+                        var transactions = await response.Content.ReadAsStringAsync() ??
                             throw new Exception("Transactions list is empty!");
-                        }
                         var result = JsonConvert.DeserializeObject<LatestTransactions>(transactions) ?? new LatestTransactions();
                         return result;
                     }

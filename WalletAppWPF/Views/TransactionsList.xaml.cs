@@ -31,14 +31,13 @@ namespace WalletAppWPF
         {
             
             InitializeComponent();
-            
-            
+
             this.ResizeMode = ResizeMode.NoResize;
 
             string currentMonth = DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
             monthTextBlock.Text = $"{currentMonth} balance";
 
-            TransactionsListInfo transactionsListInfo = new TransactionsListInfo();
+            TransactionsListInfo transactionsListInfo = new();
             this.DataContext = transactionsListInfo;
 
         }
@@ -52,9 +51,8 @@ namespace WalletAppWPF
                 {
                     throw new Exception("Transaction list row is null");
                 }
-                var selectedData = selectedListBoxItem as LatestTransactions;
 
-                if (selectedData == null)
+                if (selectedListBoxItem is not LatestTransactions selectedData)
                 {
                     throw new Exception("Incorrect data in transaction list row");
                 }

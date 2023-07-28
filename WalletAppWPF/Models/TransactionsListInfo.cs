@@ -52,6 +52,5 @@ namespace WalletAppWPF.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-
     }
 }

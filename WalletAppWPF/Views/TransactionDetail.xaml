@@ -3,11 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WalletAppWPF.Views"
+        xmlns:models="clr-namespace:WalletAppWPF.Models" 
+        xmlns:converters="clr-namespace:WalletAppWPF.Views.Converters"
+        xmlns:local="clr-namespace:WalletAppWPF"
+        d:DataContext="{d:DesignInstance Type=models:LatestTransactions}"
         mc:Ignorable="d"
         Title="TransactionDetail" Height="800" Width="450"
-        WindowStartupLocation="CenterScreen">
-    <Grid Height="800" Width="450">
-        
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.Resources>
+        <converters:PendingToStatusConverter x:Key="StatusConverter"/>
+    </Window.Resources>
+
+
+
+    <Grid  Height="768" Width="432"  Background="#DCDCDC">
+        <Grid Margin="0,20,0,584" Background="#DCDCDC">
+
+            <TextBlock Height="50" VerticalAlignment="Top" Margin="134,30,134,0" FontWeight="Bold"
+                           Foreground="Black" TextAlignment="Center" FontSize="30" Text="{Binding Sum, StringFormat='${0}'}"></TextBlock>
+            <TextBlock Height="20" VerticalAlignment="Top" Margin="134,85,134,0" 
+                           Foreground="#BEBEBE" TextAlignment="Center" FontSize="16" Text="{Binding Name}"></TextBlock>
+            <TextBlock Height="29" VerticalAlignment="Top" Margin="134,106,134,0" 
+                Foreground="#BEBEBE" TextAlignment="Center" FontSize="16" Text="{Binding Date}"/>
+        </Grid>
+        <Grid Width="420" Height="100" HorizontalAlignment="Center" Margin="0,199,0,469" Background="White">
+            <TextBlock Height="30" Width="200" VerticalAlignment="Top" Margin="15,10,205,0" FontWeight="Bold"           
+                           Foreground="Black" TextAlignment="Left" FontSize="18" Text="{Binding Pending,StringFormat='Status: {0}',Converter={StaticResource StatusConverter}}"></TextBlock>
+            <TextBlock Height="40" VerticalAlignment="Top" Margin="15,50,140,0" 
+                           Foreground="#BEBEBE" TextAlignment="Left" FontSize="16" Text="{Binding Description}"></TextBlock>
+        </Grid>
+        <Grid Width="420" Height="50" HorizontalAlignment="Center" Margin="0,314,0,404" Background="White">
+            <TextBlock Height="20" VerticalAlignment="Top" Margin="10,13,271,0" FontWeight="Bold"
+                           Foreground="Black" TextAlignment="Left" FontSize="18">Total:</TextBlock>
+            <TextBlock Height="20" VerticalAlignment="Top" Margin="283,13,10,0" FontWeight="Bold"
+                           Foreground="Black" TextAlignment="Right" FontSize="18" Text="{Binding Sum, StringFormat='${0}'}"></TextBlock>
+
+        </Grid>
     </Grid>
 </Window>
+

@@ -24,27 +24,26 @@ namespace WalletAppWPF.Views
     /// </summary>
     public partial class TransactionDetail : Window, INotifyPropertyChanged
     {
-        LatestTransactions transaction = new LatestTransactions();
+        public LatestTransactions transaction { get; set; }
         int _userId;
         long _id;
         public TransactionDetail(int userId, long id)
         {
             InitializeComponent();
 
+            this.ResizeMode = ResizeMode.NoResize;
+
             _userId = userId;
             _id = id;
 
             FillWindowFields();
-
-            this.DataContext = transaction;
-
-
         }
         private async void FillWindowFields()
         {
             GetTransactionsFromApi getTransaction = new();
             transaction = (LatestTransactions)await getTransaction.GetTransaction(_userId, _id);
-            OnPropertyChanged("transaction");
+
+            DataContext = transaction ?? new LatestTransactions();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
