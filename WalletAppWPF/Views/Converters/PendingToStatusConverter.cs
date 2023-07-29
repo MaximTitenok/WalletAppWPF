@@ -22,7 +22,7 @@ namespace WalletAppWPF.Views.Converters
             }
             else
             {
-                return "Pengind";
+                return "Pending";
             }
         }
 

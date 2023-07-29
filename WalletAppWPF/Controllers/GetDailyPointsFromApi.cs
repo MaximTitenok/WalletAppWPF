@@ -27,8 +27,9 @@ namespace WalletAppWPF.Controller
                     if (response.IsSuccessStatusCode)
                     {
                         var transactions = await response.Content.ReadAsStringAsync();
+                        int points = 0;
+                        bool ParseResult = int.TryParse(transactions, out points);
 
-                        bool ParseResult = int.TryParse(transactions, out var points);
                         if (ParseResult == false)
                         {
                             throw new Exception($"Response hasn't DailyPoints");
@@ -49,7 +50,7 @@ namespace WalletAppWPF.Controller
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                return "";
+                return "0";
 
             }
         }

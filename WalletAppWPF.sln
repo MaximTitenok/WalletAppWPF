@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletAppWPF", "WalletAppWPF\WalletAppWPF.csproj", "{DA4924F3-5094-45D6-9D1D-C8942A182EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletAppWPF", "WalletAppWPF\WalletAppWPF.csproj", "{DA4924F3-5094-45D6-9D1D-C8942A182EAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletAppWpf.Tests", "WalletAppWpf.Tests\WalletAppWpf.Tests.csproj", "{A8F224D6-8232-4FD8-9A99-C99660F5E41A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DA4924F3-5094-45D6-9D1D-C8942A182EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA4924F3-5094-45D6-9D1D-C8942A182EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA4924F3-5094-45D6-9D1D-C8942A182EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F224D6-8232-4FD8-9A99-C99660F5E41A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F224D6-8232-4FD8-9A99-C99660F5E41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F224D6-8232-4FD8-9A99-C99660F5E41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F224D6-8232-4FD8-9A99-C99660F5E41A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
